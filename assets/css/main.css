@@ -58,7 +58,7 @@ hr { border: none; border-top: 2px solid var(--green-mid); margin: 2rem 0; }
   padding: 0 1.25rem;
 }
 
-main { padding: 2.5rem 0 4rem; }
+main { padding: 0 0 4rem; }
 
 /* ---- Navigation ---- */
 .site-nav {
