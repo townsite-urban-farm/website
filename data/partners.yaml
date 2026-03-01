@@ -1,8 +1,29 @@
 # Add partner organizations here.
 # Fields: name (required), url (optional), description (optional)
 
+- name: "Caporaso Lab - Northern Arizona University"
+  url: "https://caplab.dev"
+
+- name: "City of Flagstaff Sustainability Office"
+  url: "https://flagstaff.az.gov/1605/sustainability"
+
+- name: "Coconino Growers Coalition"
+
+- name: "E'e'ah Gardens"
+
 - name: "Flagstaff Foodlink"
   url: "https://flagstafffoodlink.com/"
 
-- name: "Caporaso Lab - Northern Arizona University"
-  url: "https://caplab.dev"
+- name: "Forestdale Farm"
+  url: "https://forestdalefarm.com"
+
+- name: "Just Cultivation Coalition (JCC)"
+
+- name: "Just Delivered"
+  url: "https://justdeliveredflg.com"
+
+- name: "Steady Harvest"
+  url: "https://hightunnelgreenhouses.net"
+
+- name: "Tolani Lake Enterprises"
+  url: "https://tolanilake.org"
