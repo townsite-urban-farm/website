@@ -1,0 +1,24 @@
+{{ define "main" }}
+<div class="page-header">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p>{{ . }}</p>{{ end }}
+  </div>
+</div>
+<div class="container">
+  {{ with .Content }}
+  <div class="post-content card mb-1" style="margin-bottom:1.5rem;">{{ . }}</div>
+  {{ end }}
+
+  <div class="partner-list">
+    {{ range .Site.Data.partners }}
+    <div class="partner-card">
+      <h3>
+        {{ if .url }}<a href="{{ .url }}" target="_blank" rel="noopener">{{ .name }}</a>{{ else }}{{ .name }}{{ end }}
+      </h3>
+      {{ with .description }}<p>{{ . }}</p>{{ end }}
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

@@ -1,0 +1,13 @@
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="container">
+    <a href="/" class="nav-logo" aria-label="Townsite Urban Farm home">
+      <img src="/images/logo.png" alt="TUF logo">
+      <span class="nav-logo-text">TUF</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/blog/"{{ if eq .Section "blog" }} aria-current="page"{{ end }}>Projects</a></li>
+      <li><a href="/reading-list/"{{ if eq .RelPermalink "/reading-list/" }} aria-current="page"{{ end }}>Reading List</a></li>
+      <li><a href="/partners/"{{ if eq .RelPermalink "/partners/" }} aria-current="page"{{ end }}>Partners</a></li>
+    </ul>
+  </div>
+</nav>

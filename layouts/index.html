@@ -1,0 +1,77 @@
+{{ define "main" }}
+
+<!-- Hero -->
+<section class="hero">
+  <img class="hero-logo" src="/images/logo.png" alt="Townsite Urban Farm logo">
+  <h1>Townsite Urban Farm</h1>
+  <p>{{ .Site.Params.description }}</p>
+</section>
+
+<div class="container">
+
+  <!-- Slack CTA -->
+  <div class="community-section">
+    <div class="community-text">
+      <h2>Join Our Community</h2>
+      <p>We coordinate projects, share volunteer opportunities, and stay connected on Slack. Everyone is welcome &mdash; come introduce yourself!</p>
+    </div>
+    <div class="community-cta">
+      <a href="{{ .Site.Params.slackInviteUrl }}" class="btn btn-slack" target="_blank" rel="noopener">
+        Join Our Slack &rarr;
+      </a>
+    </div>
+  </div>
+
+  <!-- Instagram Feed -->
+  <section class="instagram-section">
+    <div class="section-heading">
+      <h2>On Instagram</h2>
+      <a href="{{ .Site.Params.instagramUrl }}" target="_blank" rel="noopener">@townsiteurbanfarm &rarr;</a>
+    </div>
+
+    <!-- BEHOLD.SO EMBED: Sign up at https://behold.so, connect your Instagram,
+         create a feed widget, and replace the two lines below with your embed snippet. -->
+    <behold-widget feed-id="sbBCfWx1qMIPuQ8QvQ89"></behold-widget>
+    <script>
+      (() => {
+        const d=document,s=d.createElement("script");s.type="module";
+        s.src="https://w.behold.so/widget.js";d.head.append(s);
+      })();
+    </script>
+    <!-- END BEHOLD.SO EMBED -->
+
+  </section>
+
+  <!-- Recent Blog Posts -->
+  {{ $posts := where .Site.RegularPages "Section" "blog" }}
+  {{ if $posts }}
+  <section class="mt-2">
+    <div class="section-heading">
+      <h2>Latest Projects</h2>
+      <a href="/blog/">All posts &rarr;</a>
+    </div>
+    <div class="card">
+      {{ range first 6 $posts }}
+      <div class="post-card-mini">
+        <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+        <div class="post-meta">{{ .Date.Format "January 2, 2006" }}</div>
+        {{ with .Description }}<p style="font-size:.92rem; margin-top:.4rem;">{{ . }}</p>{{ end }}
+      </div>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+  <!-- Quick Links -->
+  <section class="mt-2 mb-1">
+    <h2>Quick Links</h2>
+    <div class="quick-links">
+      <a href="{{ .Site.Params.weatherStationUrl }}" target="_blank" rel="noopener">&#127782; TUF Weather Station</a>
+      <a href="/reading-list/">&#128218; Reading List</a>
+      <a href="/partners/">&#129309; Partner Organizations</a>
+      <a href="mailto:{{ .Site.Params.email }}">&#9993; Contact Us</a>
+    </div>
+  </section>
+
+</div>
+{{ end }}

@@ -1,0 +1,13 @@
+# Add your favorite books here.
+# Fields: title (required), author (required), url (optional), description (optional)
+# The url should link to a library catalog, bookshop.org, or other source.
+
+- title: "Rainwater Harvesting for Drylands and Beyond"
+  author: "Brad Lancaster"
+  url: "https://bookshop.org/p/books/rainwater-harvesting-for-drylands-and-beyond-volume-1-3rd-edition-guiding-principles-to-welcome-rain-into-your-life-and-landscape-brad-lancaster/186716f82ce6dc06?ean=9780977246458&next=t"
+  description: "Where we learned everything we know about rainwater harvesting - couldn't recommend more highly!"
+
+- title: "Gaia's Garden: A Guide to Home-Scale Permaculture"
+  author: "Toby Hemenway"
+  url: "https://bookshop.org/p/books/gaia-s-garden-a-guide-to-home-scale-permaculture-2nd-edition-toby-hemenway/caf402f8cc67a964?ean=9781603580298&next=t"
+  description: "Informed a lot of our approaches to gardening at TUF. An incredible resouce that we refer back to regularly."

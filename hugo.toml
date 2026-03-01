@@ -1,0 +1,20 @@
+baseURL = "https://townsiteuf.org/"
+languageCode = "en-us"
+title = "Townsite Urban Farm"
+paginate = 10
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+
+[params]
+  description = "A small-scale cooperative urban farm in downtown Flagstaff, Arizona that aims to create a resilient community network through permaculture principles, collaborative learning, and social connectivity."
+  email = "info@townsiteuf.org"
+  slackInviteUrl = "https://join.slack.com/t/townsiteurbanfarm/shared_invite/zt-3rhfrk4f5-C6yC6BsGHwTivDhq6uN7Ag"
+  instagramUrl = "https://www.instagram.com/townsiteurbanfarm"
+  weatherStationUrl = "https://www.wunderground.com/dashboard/pws/KAZFLAGS562"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

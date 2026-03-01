@@ -1,0 +1,8 @@
+# Add partner organizations here.
+# Fields: name (required), url (optional), description (optional)
+
+- name: "Flagstaff Foodlink"
+  url: "https://flagstafffoodlink.com/"
+
+- name: "Caporaso Lab - Northern Arizona University"
+  url: "https://caplab.dev"

@@ -1,0 +1,25 @@
+{{ define "main" }}
+<div class="page-header">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p>{{ . }}</p>{{ end }}
+  </div>
+</div>
+<div class="container">
+  {{ with .Content }}
+  <div class="post-content card mb-1" style="margin-bottom:1.5rem;">{{ . }}</div>
+  {{ end }}
+
+  <div class="book-list">
+    {{ range .Site.Data.books }}
+    <div class="book-card">
+      <h3>
+        {{ if .url }}<a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>{{ else }}{{ .title }}{{ end }}
+      </h3>
+      <div class="book-author">{{ .author }}</div>
+      {{ with .description }}<p>{{ . }}</p>{{ end }}
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

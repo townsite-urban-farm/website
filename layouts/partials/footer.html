@@ -1,0 +1,22 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-col">
+      <h4>Townsite Urban Farm</h4>
+      <p>A cooperative urban farm in<br>downtown Flagstaff, Arizona.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <a href="{{ .Site.Params.slackInviteUrl }}" target="_blank" rel="noopener">Join our Slack</a>
+      <a href="{{ .Site.Params.instagramUrl }}" target="_blank" rel="noopener">Instagram</a>
+      <a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="/blog/">Projects</a>
+      <a href="/reading-list/">Reading List</a>
+      <a href="/partners/">Partners</a>
+      <a href="{{ .Site.Params.weatherStationUrl }}" target="_blank" rel="noopener">Weather Station</a>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; {{ now.Year }} Townsite Urban Farm</div>
+</footer>
