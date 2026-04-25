@@ -1,6 +1,6 @@
 baseURL = "https://townsiteuf.org/"
 languageCode = "en-us"
-title = "Townsite Urban Farm"
+title = "TUF"
 paginate = 10
 
 [outputs]
