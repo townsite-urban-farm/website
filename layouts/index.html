@@ -9,23 +9,9 @@
 
 <div class="container">
 
-  <!-- Slack CTA -->
-  <div class="community-section">
-    <div class="community-text">
-      <h2>Join Our Community</h2>
-      <p>We coordinate projects, share volunteer opportunities, and stay connected on Slack. Everyone is welcome &mdash; come introduce yourself!</p>
-    </div>
-    <div class="community-cta">
-      <a href="{{ .Site.Params.slackInviteUrl }}" class="btn btn-slack" target="_blank" rel="noopener">
-        Join Our Slack &rarr;
-      </a>
-    </div>
-  </div>
-
   <!-- Instagram Feed -->
   <section class="instagram-section">
     <div class="section-heading">
-      <h2>On Instagram</h2>
       <a href="{{ .Site.Params.instagramUrl }}" target="_blank" rel="noopener">@townsiteurbanfarm &rarr;</a>
     </div>
 
@@ -46,10 +32,7 @@
   {{ $posts := where .Site.RegularPages "Section" "blog" }}
   {{ if $posts }}
   <section class="mt-2">
-    <div class="section-heading">
-      <h2>Latest Projects</h2>
-      <a href="/blog/">All posts &rarr;</a>
-    </div>
+    <a href="/blog/">News feed &rarr;</a>
     <div class="card">
       {{ range first 6 $posts }}
       <div class="post-card-mini">
@@ -64,7 +47,6 @@
 
   <!-- Quick Links -->
   <section class="mt-2 mb-1">
-    <h2>Quick Links</h2>
     <div class="quick-links">
       <a href="{{ .Site.Params.weatherStationUrl }}" target="_blank" rel="noopener">&#127782; TUF Weather Station</a>
       <a href="/reading-list/">&#128218; Reading List</a>
@@ -72,6 +54,19 @@
       <a href="mailto:{{ .Site.Params.email }}">&#9993; Contact Us</a>
     </div>
   </section>
+
+  <!-- WhatsApp CTA -->
+  <div class="community-section">
+    <div class="community-text">
+      <h2>Get in touch</h2>
+      <p>We coordinate projects and share event information on WhatsApp. Reach out to join us there.</p>
+    </div>
+    <div class="community-cta">
+      <a href="{{ .Site.Params.whatsappInviteUrl }}" class="btn btn-whatsapp" target="_blank" rel="noopener">
+        Join Our WhatsApp &rarr;
+      </a>
+    </div>
+  </div>
 
 </div>
 {{ end }}
