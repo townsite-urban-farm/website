@@ -8,7 +8,7 @@ paginate = 10
   section = ["HTML", "RSS"]
 
 [params]
-  description = "A small-scale cooperative urban farm in downtown Flagstaff, Arizona that aims to create a resilient community network through permaculture principles, collaborative learning, and social connectivity."
+  description = "A small-scale urban farm in downtown Flagstaff, Arizona that aims to create a resilient community network through permaculture principles, collaborative learning, and social connectivity."
   email = "info@townsiteuf.org"
   whatsappInviteUrl = "https://chat.whatsapp.com/CqvjMoDGmWa9VUf2Lr1aGd"
   instagramUrl = "https://www.instagram.com/townsiteurbanfarm"
