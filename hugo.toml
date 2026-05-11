@@ -13,6 +13,7 @@ paginate = 10
   whatsappInviteUrl = "https://chat.whatsapp.com/CqvjMoDGmWa9VUf2Lr1aGd"
   instagramUrl = "https://www.instagram.com/townsiteurbanfarm"
   weatherStationUrl = "https://www.wunderground.com/dashboard/pws/KAZFLAGS562"
+  r2MediaUrl = "https://media.townsiteuf.org"
 
 [markup]
   [markup.goldmark]
