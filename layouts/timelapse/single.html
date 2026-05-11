@@ -1,0 +1,127 @@
+{{ define "main" }}
+{{ $r2 := .Site.Params.r2MediaUrl }}
+<div class="page-header">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p>{{ . }}</p>{{ end }}
+  </div>
+</div>
+
+<div class="container">
+  <div class="tl-player card">
+
+    <div class="tl-slots" role="group" aria-label="Time slot">
+      <button class="tl-btn active" data-video="all">All</button>
+      <button class="tl-btn" data-video="06h00">6 AM</button>
+      <button class="tl-btn" data-video="08h00">8 AM</button>
+      <button class="tl-btn" data-video="10h00">10 AM</button>
+      <button class="tl-btn" data-video="12h00">Noon</button>
+      <button class="tl-btn" data-video="14h00">2 PM</button>
+      <button class="tl-btn" data-video="16h00">4 PM</button>
+      <button class="tl-btn" data-video="18h00">6 PM</button>
+      <button class="tl-btn" data-video="20h00">8 PM</button>
+    </div>
+
+    <video id="tl-video" controls playsinline preload="metadata" class="tl-video">
+      <source id="tl-src" src="{{ $r2 }}/gallery/videos/hoophouse-all.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+    <p class="tl-caption" id="tl-caption">Every photo — all hours, all days</p>
+
+  </div>
+
+  <div class="tl-links">
+    <a href="{{ $r2 }}/gallery/" class="btn btn-outline">Browse all photos &rarr;</a>
+  </div>
+
+  {{ .Content }}
+</div>
+
+<style>
+.tl-player { padding: 1.5rem; }
+
+.tl-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin-bottom: 1rem;
+}
+
+.tl-btn {
+  background: var(--blue-light);
+  border: 1px solid var(--blue-mid);
+  color: var(--blue-dark);
+  font-family: var(--font-mono);
+  font-size: .85rem;
+  font-weight: 600;
+  padding: .3rem .75rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background .12s, color .12s;
+}
+.tl-btn:hover { background: var(--blue-mid); }
+.tl-btn.active { background: var(--blue-dark); color: var(--white); border-color: var(--blue-dark); }
+
+.tl-video {
+  width: 100%;
+  border-radius: var(--radius);
+  background: #000;
+  display: block;
+}
+
+.tl-caption {
+  font-size: .82rem;
+  color: var(--text-muted);
+  margin-top: .5rem;
+  font-family: var(--font-mono);
+  text-align: center;
+}
+
+.tl-links {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+</style>
+
+<script>
+(function () {
+  const BASE = '{{ $r2 }}/gallery/videos';
+  const LABELS = {
+    all:   'Every photo — all hours, all days',
+    '06h00': '6:00 AM — early morning light',
+    '08h00': '8:00 AM — morning',
+    '10h00': '10:00 AM — mid-morning',
+    '12h00': 'Noon — midday',
+    '14h00': '2:00 PM — afternoon',
+    '16h00': '4:00 PM — late afternoon',
+    '18h00': '6:00 PM — evening',
+    '20h00': '8:00 PM — dusk',
+  };
+
+  const video   = document.getElementById('tl-video');
+  const src     = document.getElementById('tl-src');
+  const caption = document.getElementById('tl-caption');
+  const buttons = document.querySelectorAll('.tl-btn');
+
+  function selectVideo(name, autoplay) {
+    src.src = `${BASE}/hoophouse-${name}.mp4`;
+    video.load();
+    if (autoplay) video.play();
+    caption.textContent = LABELS[name] || name;
+    buttons.forEach(b => b.classList.toggle('active', b.dataset.video === name));
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => selectVideo(btn.dataset.video, true));
+  });
+
+  const vParam = new URLSearchParams(location.search).get('v');
+  if (vParam && LABELS[vParam]) {
+    selectVideo(vParam, false);
+  }
+})();
+</script>
+{{ end }}
