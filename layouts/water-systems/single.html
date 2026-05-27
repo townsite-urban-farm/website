@@ -1,0 +1,158 @@
+{{ define "main" }}
+<div class="page-header">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p>{{ . }}</p>{{ end }}
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="ws-map-card card">
+    <div class="ws-controls" role="group" aria-label="Map layers">
+      <label class="ws-toggle">
+        <input type="checkbox" id="layer-rainwater" checked>
+        <span class="ws-swatch ws-swatch-rain"></span>
+        Rainwater Harvesting
+      </label>
+      <label class="ws-toggle">
+        <input type="checkbox" id="layer-irrigation" checked>
+        <span class="ws-swatch ws-swatch-irr"></span>
+        Irrigation
+      </label>
+    </div>
+
+    <div class="ws-map">
+      <img class="ws-layer ws-base"
+           src="/water-systems/site-map-base.png"
+           alt="TUF site map base layer">
+      <img class="ws-layer ws-overlay" id="img-rainwater"
+           src="/water-systems/site-map-rainwater.png"
+           alt="Rainwater harvesting system overlay">
+      <img class="ws-layer ws-overlay" id="img-irrigation"
+           src="/water-systems/site-map-irrigation.png"
+           alt="Irrigation system overlay">
+    </div>
+  </div>
+
+  <hr>
+
+  <section class="ws-notes">
+    <h2>Rainwater Harvesting</h2>
+
+    <p class="ws-placeholder">
+      <em>[ Placeholder — add technical notes here: tank locations and capacities,
+      first-flush diverter operation, overflow routing, seasonal shutdown procedure. ]</em>
+    </p>
+
+    <h3>System Overview</h3>
+    <p></p>
+
+    <h3>Normal Operation</h3>
+    <p></p>
+
+    <h3>Maintenance</h3>
+    <p></p>
+  </section>
+
+  <hr>
+
+  <section class="ws-notes">
+    <h2>Irrigation</h2>
+
+    <p class="ws-placeholder">
+      <em>[ Placeholder — add technical notes here: valve locations, zone map,
+      timer settings, drip vs. overhead zones, filter cleaning, winterization. ]</em>
+    </p>
+
+    <h3>System Overview</h3>
+    <p></p>
+
+    <h3>Normal Operation</h3>
+    <p></p>
+
+    <h3>Maintenance</h3>
+    <p></p>
+  </section>
+
+</div>
+
+<style>
+.ws-map-card { padding: 1.25rem; }
+
+.ws-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-bottom: 1rem;
+}
+
+.ws-toggle {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  cursor: pointer;
+  font-size: .9rem;
+  user-select: none;
+}
+
+.ws-toggle input[type="checkbox"] {
+  width: 1.1rem;
+  height: 1.1rem;
+  cursor: pointer;
+  accent-color: var(--blue-primary);
+}
+
+.ws-swatch {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 3px;
+  border: 1px solid rgba(0,0,0,.15);
+  flex-shrink: 0;
+}
+
+.ws-swatch-rain { background: #3a8fd6; }
+.ws-swatch-irr  { background: #4caf50; }
+
+.ws-map {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.ws-base {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.ws-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.ws-notes { margin: 1.5rem 0; }
+.ws-notes h2 { margin-bottom: .75rem; }
+.ws-notes h3 { margin-top: 1.25rem; }
+
+.ws-placeholder { color: var(--text-muted); font-style: italic; }
+</style>
+
+<script>
+(function () {
+  function wireLayer(checkboxId, imgId) {
+    var cb  = document.getElementById(checkboxId);
+    var img = document.getElementById(imgId);
+    cb.addEventListener('change', function () {
+      img.style.display = this.checked ? '' : 'none';
+    });
+  }
+  wireLayer('layer-rainwater', 'img-rainwater');
+  wireLayer('layer-irrigation', 'img-irrigation');
+})();
+</script>
+{{ end }}
