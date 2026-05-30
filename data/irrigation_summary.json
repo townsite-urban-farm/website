@@ -2,11 +2,22 @@
   "last_updated": "2026-05-30",
   "season_start": "2026-05-25",
   "grant_zone": 0,
-  "zones": [
-    { "index": 0, "label": "UA advancing markets" }
-  ],
-  "season_totals": [
-    { "index": 0, "label": "UA advancing markets", "duration_min": 0.0, "duration_hhmm": "0:00" }
-  ],
-  "weekly": []
+  "zones": [],
+  "season_totals": [],
+  "weekly": [
+    {
+      "week": "2026-W22",
+      "week_start": "2026-05-25",
+      "week_end": "2026-05-31",
+      "zones": [],
+      "weather": {
+        "precip_total_in": 0.07,
+        "precip_display": "0.07",
+        "temp_high_f": 69.8,
+        "temp_low_f": 38.1,
+        "temp_display": "70 / 38",
+        "data_complete": true
+      }
+    }
+  ]
 }
