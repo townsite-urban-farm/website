@@ -12,7 +12,8 @@
 
   {{ with .Site.Data.irrigation_summary }}
 
-  {{ $grant_zone := .grant_zone }}
+  {{ $visible_zones := .default_visible_zones }}
+  {{ $flow_estimated := .flow_rate_estimated }}
 
   <div class="ws-controls ws-zone-controls" role="group" aria-label="Zones"
        id="ws-usage-data"
@@ -21,7 +22,7 @@
     {{ range .zones }}
     <label class="ws-toggle">
       <input type="checkbox" id="zone-toggle-{{ .index }}"
-             {{ if eq .index $grant_zone }}checked{{ end }}>
+             {{ if in $visible_zones .index }}checked{{ end }}>
       <span class="ws-swatch ws-swatch-zone-{{ .index }}"></span>
       {{ .label }}
     </label>
@@ -31,13 +32,18 @@
   <h2>Season total <span class="ws-season-note">(from {{ .season_start }})</span></h2>
   <table class="ws-table">
     <thead>
-      <tr><th>Zone</th><th>Total irrigation</th></tr>
+      <tr>
+        <th>Zone</th>
+        <th class="ws-num">Total irrigation</th>
+        {{ if $flow_estimated }}<th class="ws-num">Gallons&#8224;</th>{{ end }}
+      </tr>
     </thead>
     <tbody>
       {{ range .season_totals }}
       <tr class="ws-zone-row" data-zone="{{ .index }}">
         <td>{{ .label }}</td>
-        <td>{{ .duration_hhmm }}</td>
+        <td class="ws-num">{{ .duration_hhmm }}</td>
+        {{ if $flow_estimated }}<td class="ws-num">{{ if .gallons }}{{ .gallons }}{{ else }}&mdash;{{ end }}</td>{{ end }}
       </tr>
       {{ end }}
     </tbody>
@@ -50,9 +56,11 @@
       <tr>
         <th>Week of</th>
         <th>Zone</th>
-        <th>Irrigation</th>
-        <th>Precip (in)</th>
-        <th>Temp H/L (&#xb0;F)</th>
+        <th class="ws-num">Irrigation</th>
+        {{ if $flow_estimated }}<th class="ws-num">Gallons&#8224;</th>{{ end }}
+        <th class="ws-num">Precip (in)</th>
+        <th class="ws-num">Humidity (%)</th>
+        <th class="ws-num">Temp H/L (&#xb0;F)</th>
         <th></th>
       </tr>
     </thead>
@@ -63,9 +71,11 @@
       <tr class="ws-zone-row" data-zone="{{ .index }}">
         <td>{{ $wk.week_start }}</td>
         <td>{{ .label }}</td>
-        <td>{{ .duration_hhmm }}</td>
-        <td>{{ if $wk.weather.precip_display }}{{ $wk.weather.precip_display }}{{ else }}&mdash;{{ end }}</td>
-        <td>{{ if $wk.weather.temp_display }}{{ $wk.weather.temp_display }}{{ else }}&mdash;{{ end }}</td>
+        <td class="ws-num">{{ .duration_hhmm }}</td>
+        {{ if $flow_estimated }}<td class="ws-num">{{ if .gallons }}{{ .gallons }}{{ else }}&mdash;{{ end }}</td>{{ end }}
+        <td class="ws-num">{{ if $wk.weather.precip_display }}{{ $wk.weather.precip_display }}{{ else }}&mdash;{{ end }}</td>
+        <td class="ws-num">{{ if $wk.weather.humidity_display }}{{ $wk.weather.humidity_display }}{{ else }}&mdash;{{ end }}</td>
+        <td class="ws-num">{{ if $wk.weather.temp_display }}{{ $wk.weather.temp_display }}{{ else }}&mdash;{{ end }}</td>
         <td><a href="/irrigation-reports/weekly/{{ $wk.week }}.csv" download>CSV</a></td>
       </tr>
       {{ end }}
@@ -73,7 +83,13 @@
     </tbody>
   </table>
   {{ if .weekly }}
-  <p class="ws-data-note">* incomplete weather data for that week &nbsp;&bull;&nbsp; Last updated: {{ .last_updated }}</p>
+  <p class="ws-data-note">
+    * incomplete weather data for that week
+    {{- if $flow_estimated }}
+    &nbsp;&bull;&nbsp; &#8224; gallon figures use estimated flow rates (spray: 2.0&#x202F;GPM, drip: 1.0&#x202F;GPM) and will be updated after field measurement
+    {{- end }}
+    &nbsp;&bull;&nbsp; Last updated: {{ .last_updated }}
+  </p>
   {{ end }}
 
   {{ else }}
@@ -91,12 +107,7 @@
 .ws-table { border-collapse: collapse; width: 100%; margin: .5rem 0 1.5rem; font-size: .9rem; }
 .ws-table th, .ws-table td { padding: .35rem .6rem; text-align: left; border-bottom: 1px solid rgba(0,0,0,.1); }
 .ws-table th { font-weight: 600; border-bottom-width: 2px; }
-.ws-table td:nth-child(3),
-.ws-table td:nth-child(4),
-.ws-table td:nth-child(5) { text-align: right; }
-.ws-table th:nth-child(3),
-.ws-table th:nth-child(4),
-.ws-table th:nth-child(5) { text-align: right; }
+.ws-table .ws-num { text-align: right; }
 
 .ws-data-note { font-size: .8rem; color: var(--text-muted); margin-top: -.75rem; margin-bottom: 1rem; }
 
