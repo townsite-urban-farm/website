@@ -1,0 +1,12 @@
+{
+  "last_updated": "2026-05-30",
+  "season_start": "2026-05-25",
+  "grant_zone": 0,
+  "zones": [
+    { "index": 0, "label": "UA advancing markets" }
+  ],
+  "season_totals": [
+    { "index": 0, "label": "UA advancing markets", "duration_min": 0.0, "duration_hhmm": "0:00" }
+  ],
+  "weekly": []
+}

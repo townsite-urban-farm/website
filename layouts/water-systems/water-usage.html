@@ -1,0 +1,130 @@
+{{ define "main" }}
+<div class="page-header">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p>{{ . }}</p>{{ end }}
+  </div>
+</div>
+
+<div class="container">
+
+  <p class="ws-back"><a href="../">&#8592; Water Systems</a></p>
+
+  {{ with .Site.Data.irrigation_summary }}
+
+  {{ $grant_zone := .grant_zone }}
+
+  <div class="ws-controls ws-zone-controls" role="group" aria-label="Zones"
+       id="ws-usage-data"
+       data-zones='{{ .zones | jsonify }}'
+       data-grant-zone="{{ .grant_zone }}">
+    {{ range .zones }}
+    <label class="ws-toggle">
+      <input type="checkbox" id="zone-toggle-{{ .index }}"
+             {{ if eq .index $grant_zone }}checked{{ end }}>
+      <span class="ws-swatch ws-swatch-zone-{{ .index }}"></span>
+      {{ .label }}
+    </label>
+    {{ end }}
+  </div>
+
+  <h2>Season total <span class="ws-season-note">(from {{ .season_start }})</span></h2>
+  <table class="ws-table">
+    <thead>
+      <tr><th>Zone</th><th>Total irrigation</th></tr>
+    </thead>
+    <tbody>
+      {{ range .season_totals }}
+      <tr class="ws-zone-row" data-zone="{{ .index }}">
+        <td>{{ .label }}</td>
+        <td>{{ .duration_hhmm }}</td>
+      </tr>
+      {{ end }}
+    </tbody>
+  </table>
+
+  <h2>Weekly log</h2>
+  <p><a href="/irrigation-reports/all-weeks.csv" download>Download all weeks (CSV)</a></p>
+  <table class="ws-table">
+    <thead>
+      <tr>
+        <th>Week of</th>
+        <th>Zone</th>
+        <th>Irrigation</th>
+        <th>Precip (in)</th>
+        <th>Temp H/L (&#xb0;F)</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ range .weekly }}
+      {{ $wk := . }}
+      {{ range .zones }}
+      <tr class="ws-zone-row" data-zone="{{ .index }}">
+        <td>{{ $wk.week_start }}</td>
+        <td>{{ .label }}</td>
+        <td>{{ .duration_hhmm }}</td>
+        <td>{{ if $wk.weather.precip_display }}{{ $wk.weather.precip_display }}{{ else }}&mdash;{{ end }}</td>
+        <td>{{ if $wk.weather.temp_display }}{{ $wk.weather.temp_display }}{{ else }}&mdash;{{ end }}</td>
+        <td><a href="/irrigation-reports/weekly/{{ $wk.week }}.csv" download>CSV</a></td>
+      </tr>
+      {{ end }}
+      {{ end }}
+    </tbody>
+  </table>
+  {{ if .weekly }}
+  <p class="ws-data-note">* incomplete weather data for that week &nbsp;&bull;&nbsp; Last updated: {{ .last_updated }}</p>
+  {{ end }}
+
+  {{ else }}
+  <p class="ws-placeholder"><em>Water usage data not yet available.</em></p>
+  {{ end }}
+
+</div>
+
+{{ partial "water-systems-css.html" . }}
+
+<style>
+.ws-zone-controls { margin: 0 0 1.5rem; }
+.ws-season-note { font-size: .85rem; font-weight: normal; color: var(--text-muted); }
+
+.ws-table { border-collapse: collapse; width: 100%; margin: .5rem 0 1.5rem; font-size: .9rem; }
+.ws-table th, .ws-table td { padding: .35rem .6rem; text-align: left; border-bottom: 1px solid rgba(0,0,0,.1); }
+.ws-table th { font-weight: 600; border-bottom-width: 2px; }
+.ws-table td:nth-child(3),
+.ws-table td:nth-child(4),
+.ws-table td:nth-child(5) { text-align: right; }
+.ws-table th:nth-child(3),
+.ws-table th:nth-child(4),
+.ws-table th:nth-child(5) { text-align: right; }
+
+.ws-data-note { font-size: .8rem; color: var(--text-muted); margin-top: -.75rem; margin-bottom: 1rem; }
+
+/* zone swatches — extend palette as zones are discovered */
+.ws-swatch-zone-0 { background: #e07b39; }
+.ws-swatch-zone-1 { background: #9b59b6; }
+.ws-swatch-zone-2 { background: #27ae60; }
+.ws-swatch-zone-3 { background: #2980b9; }
+.ws-swatch-zone-4 { background: #c0392b; }
+.ws-swatch-zone-5 { background: #f39c12; }
+</style>
+
+<script>
+(function () {
+  var el = document.getElementById('ws-usage-data');
+  if (!el) return;
+  var zones = JSON.parse(el.dataset.zones);
+  function wireZone(checkboxId, zoneIndex) {
+    var cb = document.getElementById(checkboxId);
+    if (!cb) return;
+    function apply() {
+      document.querySelectorAll('.ws-zone-row[data-zone="' + zoneIndex + '"]')
+        .forEach(function (row) { row.style.display = cb.checked ? '' : 'none'; });
+    }
+    cb.addEventListener('change', apply);
+    apply();
+  }
+  zones.forEach(function (z) { wireZone('zone-toggle-' + z.index, z.index); });
+})();
+</script>
+{{ end }}

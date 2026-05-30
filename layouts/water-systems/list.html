@@ -1,0 +1,126 @@
+{{ define "main" }}
+<div class="page-header">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p>{{ . }}</p>{{ end }}
+  </div>
+</div>
+
+<div class="container">
+
+  <nav class="ws-nav-cards" aria-label="Water systems sections">
+    <a href="irrigation/" class="ws-nav-card card">
+      <div class="ws-nav-title">Irrigation</div>
+      <div class="ws-nav-desc">OpenSprinkler controller — manual operation, zone test, and remote access</div>
+    </a>
+    <a href="water-usage/" class="ws-nav-card card">
+      <div class="ws-nav-title">Water Usage Log</div>
+      <div class="ws-nav-desc">Weekly irrigation data and downloadable reports for grant tracking</div>
+    </a>
+    <a href="rainwater/" class="ws-nav-card card">
+      <div class="ws-nav-title">Rainwater Harvesting</div>
+      <div class="ws-nav-desc">Tank locations, first-flush diverter, and seasonal operation</div>
+    </a>
+  </nav>
+
+  <hr>
+
+  <div class="ws-map-card card">
+    <div class="ws-controls" role="group" aria-label="Map layers">
+      <label class="ws-toggle">
+        <input type="checkbox" id="layer-rainwater" checked>
+        <span class="ws-swatch ws-swatch-rain"></span>
+        Rainwater Harvesting
+      </label>
+      <label class="ws-toggle">
+        <input type="checkbox" id="layer-irrigation" checked>
+        <span class="ws-swatch ws-swatch-irr"></span>
+        Irrigation
+      </label>
+    </div>
+
+    <div class="ws-map">
+      <img class="ws-layer ws-base"
+           src="/water-systems/site-map-base.png"
+           alt="TUF site map base layer">
+      <img class="ws-layer ws-overlay" id="img-rainwater"
+           src="/water-systems/site-map-rainwater.png"
+           alt="Rainwater harvesting system overlay">
+      <img class="ws-layer ws-overlay" id="img-irrigation"
+           src="/water-systems/site-map-irrigation.png"
+           alt="Irrigation system overlay">
+    </div>
+  </div>
+
+  <hr>
+
+  <p class="grant-ack">
+    Water usage data for this project is supported by the UA &#8220;Advancing Markets&#8221; grant.
+    <strong>Note: Request grant acknowledgement preferences from Mary.</strong>
+  </p>
+
+</div>
+
+{{ partial "water-systems-css.html" . }}
+
+<style>
+.ws-nav-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 0 0 1.5rem;
+}
+
+.ws-nav-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow .15s;
+}
+.ws-nav-card:hover { box-shadow: 0 4px 14px rgba(0,0,0,.13); color: inherit; text-decoration: none; }
+
+.ws-nav-title { font-weight: 700; color: var(--blue-dark); margin-bottom: .35rem; }
+.ws-nav-desc  { font-size: .88rem; color: var(--text-muted); }
+
+.ws-map-card { padding: 1.25rem; }
+
+.ws-swatch-rain { background: #3a8fd6; }
+.ws-swatch-irr  { background: #4caf50; }
+
+.ws-map {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.ws-base  { width: 100%; height: auto; display: block; }
+.ws-layer { display: block; }
+.ws-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+}
+
+.grant-ack {
+  border-left: 3px solid var(--blue-primary);
+  padding-left: .75rem;
+  margin: 1.5rem 0;
+  font-size: .9rem;
+}
+</style>
+
+<script>
+(function () {
+  function wireLayer(checkboxId, imgId) {
+    var cb  = document.getElementById(checkboxId);
+    var img = document.getElementById(imgId);
+    cb.addEventListener('change', function () {
+      img.style.display = this.checked ? '' : 'none';
+    });
+  }
+  wireLayer('layer-rainwater', 'img-rainwater');
+  wireLayer('layer-irrigation', 'img-irrigation');
+})();
+</script>
+{{ end }}

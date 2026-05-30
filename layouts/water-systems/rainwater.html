@@ -1,0 +1,34 @@
+{{ define "main" }}
+<div class="page-header">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p>{{ . }}</p>{{ end }}
+  </div>
+</div>
+
+<div class="container">
+
+  <p class="ws-back"><a href="../">&#8592; Water Systems</a></p>
+
+  <section class="ws-notes">
+    <h2>Rainwater Harvesting</h2>
+
+    <p class="ws-placeholder">
+      <em>[ Placeholder — add technical notes here: tank locations and capacities,
+      first-flush diverter operation, overflow routing, seasonal shutdown procedure. ]</em>
+    </p>
+
+    <h3>System Overview</h3>
+    <p></p>
+
+    <h3>Normal Operation</h3>
+    <p></p>
+
+    <h3>Maintenance</h3>
+    <p></p>
+  </section>
+
+</div>
+
+{{ partial "water-systems-css.html" . }}
+{{ end }}
