@@ -29,26 +29,6 @@
     {{ end }}
   </div>
 
-  <h2>Season total <span class="ws-season-note">(from {{ .season_start }})</span></h2>
-  <table class="ws-table">
-    <thead>
-      <tr>
-        <th>Zone</th>
-        <th class="ws-num">Total irrigation</th>
-        {{ if $flow_estimated }}<th class="ws-num">Gallons&#8224;</th>{{ end }}
-      </tr>
-    </thead>
-    <tbody>
-      {{ range .season_totals }}
-      <tr class="ws-zone-row" data-zone="{{ .index }}">
-        <td>{{ .label }}</td>
-        <td class="ws-num">{{ .duration_hhmm }}</td>
-        {{ if $flow_estimated }}<td class="ws-num">{{ if .gallons }}{{ .gallons }}{{ else }}&mdash;{{ end }}</td>{{ end }}
-      </tr>
-      {{ end }}
-    </tbody>
-  </table>
-
   <h2>Weekly log</h2>
   <p><a href="/irrigation-reports/all-weeks.csv" download>Download all weeks (CSV)</a></p>
   <table class="ws-table">
@@ -56,8 +36,7 @@
       <tr>
         <th>Week of</th>
         <th>Zone</th>
-        <th class="ws-num">Irrigation</th>
-        {{ if $flow_estimated }}<th class="ws-num">Gallons&#8224;</th>{{ end }}
+        <th class="ws-num">Gallons{{ if $flow_estimated }}&#8224;{{ end }}</th>
         <th class="ws-num">Precip (in)</th>
         <th class="ws-num">Humidity (%)</th>
         <th class="ws-num">Temp H/L (&#xb0;F)</th>
@@ -71,8 +50,7 @@
       <tr class="ws-zone-row" data-zone="{{ .index }}">
         <td>{{ $wk.week_start }}</td>
         <td>{{ .label }}</td>
-        <td class="ws-num">{{ .duration_hhmm }}</td>
-        {{ if $flow_estimated }}<td class="ws-num">{{ if .gallons }}{{ .gallons }}{{ else }}&mdash;{{ end }}</td>{{ end }}
+        <td class="ws-num">{{ if .gallons }}{{ .gallons }}{{ else }}&mdash;{{ end }}</td>
         <td class="ws-num">{{ if $wk.weather.precip_display }}{{ $wk.weather.precip_display }}{{ else }}&mdash;{{ end }}</td>
         <td class="ws-num">{{ if $wk.weather.humidity_display }}{{ $wk.weather.humidity_display }}{{ else }}&mdash;{{ end }}</td>
         <td class="ws-num">{{ if $wk.weather.temp_display }}{{ $wk.weather.temp_display }}{{ else }}&mdash;{{ end }}</td>
@@ -82,13 +60,35 @@
       {{ end }}
     </tbody>
   </table>
+
+  <h2>Season total <span class="ws-season-note">(from {{ .season_start }})</span></h2>
+  <table class="ws-table">
+    <thead>
+      <tr>
+        <th>Zone</th>
+        <th class="ws-num">Total irrigation</th>
+        <th class="ws-num">Gallons{{ if $flow_estimated }}&#8224;{{ end }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ range .season_totals }}
+      <tr class="ws-zone-row" data-zone="{{ .index }}">
+        <td>{{ .label }}</td>
+        <td class="ws-num">{{ .duration_hhmm }}</td>
+        <td class="ws-num">{{ if .gallons }}{{ .gallons }}{{ else }}&mdash;{{ end }}</td>
+      </tr>
+      {{ end }}
+    </tbody>
+  </table>
+
   {{ if .weekly }}
+  {{ $sha := os.Getenv "CF_PAGES_COMMIT_SHA" }}
   <p class="ws-data-note">
     * incomplete weather data for that week
     {{- if $flow_estimated }}
     &nbsp;&bull;&nbsp; &#8224; gallon figures use estimated flow rates (spray: 2.0&#x202F;GPM, drip: 1.0&#x202F;GPM) and will be updated after field measurement
     {{- end }}
-    &nbsp;&bull;&nbsp; Last updated: {{ .last_updated }}
+    &nbsp;&bull;&nbsp; Last updated: {{ .last_updated }}{{ if $sha }} (version: {{ printf "%.7s" $sha }}){{ end }}
   </p>
   {{ end }}
 
