@@ -15,6 +15,9 @@ paginate = 10
   weatherStationUrl = "https://www.wunderground.com/dashboard/pws/KAZFLAGS562"
   r2MediaUrl = "https://media.townsiteuf.org"
 
+[security.funcs]
+  getenv = ['^HUGO_', '^CI$', '^CF_PAGES_COMMIT_SHA$']
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
