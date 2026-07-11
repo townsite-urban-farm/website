@@ -14,6 +14,7 @@
 
   {{ $visible_zones := .default_visible_zones }}
   {{ $flow_estimated := .flow_rate_estimated }}
+  {{ $season_start := .season_start }}
 
   <div class="ws-controls ws-zone-controls" role="group" aria-label="Zones"
        id="ws-usage-data"
@@ -80,6 +81,54 @@
       {{ end }}
     </tbody>
   </table>
+
+  {{ with .crop_breakdown }}
+  {{ range . }}
+  <h2>Per-crop water usage <span class="ws-season-note">({{ .zone_label }} &mdash; estimated allocation)</span></h2>
+  <p><a href="/irrigation-reports/crops-all-weeks.csv" download>Download all weeks, per crop (CSV)</a></p>
+  <table class="ws-table">
+    <thead>
+      <tr>
+        <th>Week of</th>
+        <th>Crop</th>
+        <th class="ws-num">Gallons</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ range .weekly }}
+      {{ $wk := . }}
+      {{ range .crops }}
+      <tr>
+        <td>{{ $wk.week_start }}</td>
+        <td>{{ .label }}</td>
+        <td class="ws-num">{{ .gallons }}</td>
+        <td><a href="/irrigation-reports/weekly/{{ $wk.week }}-crops.csv" download>CSV</a></td>
+      </tr>
+      {{ end }}
+      {{ end }}
+    </tbody>
+  </table>
+
+  <h3>Season total by crop <span class="ws-season-note">(from {{ $season_start }})</span></h3>
+  <table class="ws-table">
+    <thead>
+      <tr>
+        <th>Crop</th>
+        <th class="ws-num">Gallons</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ range .season }}
+      <tr>
+        <td>{{ .label }}</td>
+        <td class="ws-num">{{ .gallons }}</td>
+      </tr>
+      {{ end }}
+    </tbody>
+  </table>
+  {{ end }}
+  {{ end }}
 
   {{ if .weekly }}
   {{ $sha := os.Getenv "CF_PAGES_COMMIT_SHA" }}
