@@ -225,6 +225,27 @@ main { padding: 0 0 4rem; }
 .whatsapp-qr img { border: 1px solid var(--blue-light); border-radius: 4px; }
 .whatsapp-qr span { font-size: .75rem; color: var(--blue-dark); }
 
+/* ---- Farm live section (timelapse + weather) ---- */
+.farm-live-video {
+  width: 100%;
+  border-radius: var(--radius);
+  background: #000;
+  display: block;
+}
+.farm-live-caption {
+  font-size: .85rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  text-align: center;
+  margin: .6rem 0 1rem;
+}
+.farm-live-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .75rem;
+}
+
 /* ---- Instagram section ---- */
 .instagram-section { margin: 2.5rem 0; }
 .instagram-section h2 { margin-bottom: 1rem; }

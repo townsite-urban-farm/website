@@ -9,6 +9,26 @@
 
 <div class="container">
 
+  <!-- Hoophouse Timelapse + Weather Station -->
+  <section class="farm-live mt-2">
+    <div class="section-heading">
+      <h2>Live from the farm</h2>
+      <a href="/timelapse/">Hoophouse timelapse &rarr;</a>
+    </div>
+    <div class="card">
+      <video controls playsinline preload="metadata" class="farm-live-video">
+        <source src="{{ .Site.Params.r2MediaUrl }}/gallery/videos/hoophouse-all.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+      <p class="farm-live-caption">A photo every two hours since October 2022 &mdash; four growing seasons in our hoophouse.</p>
+      <div class="farm-live-links">
+        <a href="/timelapse/" class="btn btn-primary">Watch by time of day &rarr;</a>
+        <a href="{{ .Site.Params.r2MediaUrl }}/gallery/" class="btn btn-outline">Browse all photos &rarr;</a>
+        <a href="{{ .Site.Params.weatherStationUrl }}" class="btn btn-outline" target="_blank" rel="noopener">&#127782; Live weather station &rarr;</a>
+      </div>
+    </div>
+  </section>
+
   <!-- Instagram Feed -->
   <section class="instagram-section">
     <div class="section-heading">
@@ -48,7 +68,6 @@
   <!-- Quick Links -->
   <section class="mt-2 mb-1">
     <div class="quick-links">
-      <a href="{{ .Site.Params.weatherStationUrl }}" target="_blank" rel="noopener">&#127782; TUF Weather Station</a>
       <a href="/reading-list/">&#128218; Books</a>
       <a href="/partners/">&#129309; Partner Organizations</a>
       <a href="mailto:{{ .Site.Params.email }}">&#9993; Contact Us</a>
