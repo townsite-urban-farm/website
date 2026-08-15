@@ -8,6 +8,14 @@
 </div>
 
 <div class="container">
+
+  <section class="tl-photos">
+    {{ partial "hoophouse-montage.html" (dict "site" .Site "class" "montage-strip" "sizes" "(max-width: 600px) calc(50vw - 1.75rem), 210px") }}
+    <div class="montage-links">
+      <a href="{{ $r2 }}/gallery/" class="btn btn-outline">Browse all photos &rarr;</a>
+    </div>
+  </section>
+
   <div class="tl-player card">
 
     <div class="tl-slots" role="group" aria-label="Time slot">
@@ -29,10 +37,6 @@
 
     <p class="tl-caption" id="tl-caption">Every photo — all hours, all days</p>
 
-  </div>
-
-  <div class="tl-links">
-    <a href="{{ $r2 }}/gallery/" class="btn btn-outline">Browse all photos &rarr;</a>
   </div>
 
   {{ .Content }}
@@ -78,12 +82,6 @@
   text-align: center;
 }
 
-.tl-links {
-  margin-top: 1.5rem;
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
 </style>
 
 <script>

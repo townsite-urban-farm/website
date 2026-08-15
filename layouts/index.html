@@ -1,37 +1,34 @@
 {{ define "main" }}
 
-<!-- Hero -->
-<section class="hero">
-  <img class="hero-logo" src="/images/logo.png" alt="Townsite Urban Farm logo">
-  <h1>Townsite Urban Farm</h1>
-  <p>{{ .Site.Params.description }}</p>
-</section>
-
 <div class="container">
 
-  <!-- Hoophouse Timelapse + Weather Station -->
-  <section class="farm-live mt-2">
-    <div class="section-heading">
-      <h2>Live from the farm</h2>
-      <a href="/timelapse/">Hoophouse timelapse &rarr;</a>
+  <!-- Masthead -->
+  <header class="mast">
+    <div class="mast-text">
+      <p class="kicker">Downtown Flagstaff, Arizona</p>
+      <h1>Townsite Urban Farm
+        <span class="sub">{{ .Site.Params.description }}</span>
+      </h1>
     </div>
-    <div class="card">
-      <video controls playsinline preload="metadata" class="farm-live-video">
-        <source src="{{ .Site.Params.r2MediaUrl }}/gallery/videos/hoophouse-all.mp4" type="video/mp4">
-        Your browser does not support HTML5 video.
-      </video>
-      <p class="farm-live-caption">A photo every two hours since October 2022 &mdash; four growing seasons in our hoophouse.</p>
-      <div class="farm-live-links">
-        <a href="/timelapse/" class="btn btn-primary">Watch by time of day &rarr;</a>
-        <a href="{{ .Site.Params.r2MediaUrl }}/gallery/" class="btn btn-outline">Browse all photos &rarr;</a>
-        <a href="{{ .Site.Params.weatherStationUrl }}" class="btn btn-outline" target="_blank" rel="noopener">&#127782; Live weather station &rarr;</a>
-      </div>
+    <img class="mast-logo" src="/images/logo.png" alt="Townsite Urban Farm logo">
+  </header>
+
+  <!-- Hoophouse timelapse montage -->
+  <section>
+    <h2>TUF hoophouse timelapse</h2>
+    <p class="lede">Watch progress of the TUF hoophouse through over 4 years of back-to-back photos.</p>
+    {{ partial "hoophouse-montage.html" (dict "site" .Site "sizes" "(max-width: 600px) calc(100vw - 2.5rem), 430px") }}
+    <div class="montage-links">
+      <a href="/timelapse/" class="btn btn-primary">See stop motion videos (updated seasonally) &rarr;</a>
+      <a href="{{ .Site.Params.r2MediaUrl }}/gallery/" class="btn btn-outline">Browse all photos &rarr;</a>
+      <a href="{{ .Site.Params.weatherStationUrl }}" class="btn btn-outline" target="_blank" rel="noopener">Live weather station &rarr;</a>
     </div>
   </section>
 
   <!-- Instagram Feed -->
   <section class="instagram-section">
     <div class="section-heading">
+      <h2>On Instagram</h2>
       <a href="{{ .Site.Params.instagramUrl }}" target="_blank" rel="noopener">@townsiteurbanfarm &rarr;</a>
     </div>
 
@@ -52,13 +49,16 @@
   {{ $posts := where .Site.RegularPages "Section" "blog" }}
   {{ if $posts }}
   <section class="mt-2">
-    <a href="/blog/">News feed &rarr;</a>
+    <div class="section-heading">
+      <h2>News</h2>
+      <a href="/blog/">News feed &rarr;</a>
+    </div>
     <div class="card">
       {{ range first 6 $posts }}
       <div class="post-card-mini">
         <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
         <div class="post-meta">{{ .Date.Format "January 2, 2006" }}</div>
-        {{ with .Description }}<p style="font-size:.92rem; margin-top:.4rem;">{{ . }}</p>{{ end }}
+        {{ with .Description }}<p style="font-size:.88rem; margin-top:.4rem;">{{ . }}</p>{{ end }}
       </div>
       {{ end }}
     </div>
@@ -68,9 +68,9 @@
   <!-- Quick Links -->
   <section class="mt-2 mb-1">
     <div class="quick-links">
-      <a href="/reading-list/">&#128218; Books</a>
-      <a href="/partners/">&#129309; Partner Organizations</a>
-      <a href="mailto:{{ .Site.Params.email }}">&#9993; Contact Us</a>
+      <a href="/reading-list/">Books</a>
+      <a href="/partners/">Partner Organizations</a>
+      <a href="mailto:{{ .Site.Params.email }}">Contact Us</a>
     </div>
   </section>
 

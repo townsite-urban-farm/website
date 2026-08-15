@@ -1,0 +1,28 @@
+{{- /*
+  Hoophouse montage: four photos spanning the timelapse archive, linking to the R2 gallery.
+  Call with: partial "hoophouse-montage.html" (dict "site" .Site "class" "<extra class>" "sizes" "<img sizes attr>")
+  Each photo has a 640w preview plus a larger variant (1280w, except the 2022
+  camera whose original tops out at 720w) — browsers pick via srcset/sizes.
+*/ -}}
+{{- $r2 := .site.Params.r2MediaUrl -}}
+{{- $sizes := .sizes -}}
+{{- $photos := slice
+  (dict "stem" "2022-10-30-1600" "big" "720" "cap" "2022-10-30 16:00" "alt" "Hoophouse interior, bare soil with irrigation lines, October 2022")
+  (dict "stem" "2023-09-15-1400" "big" "1280" "cap" "2023-09-15 14:00" "alt" "Hoophouse interior, first full growing season, September 2023")
+  (dict "stem" "2024-01-04-0800" "big" "1280" "cap" "2024-01-04 08:00" "alt" "Hoophouse interior in winter, January 2024")
+  (dict "stem" "2025-09-21-1400" "big" "1280" "cap" "2025-09-21 14:00" "alt" "Hoophouse interior overgrown with grape vines and tomatoes, September 2025")
+-}}
+<div class="montage{{ with .class }} {{ . }}{{ end }}">
+  {{- range $i, $p := $photos }}
+  <a href="{{ $r2 }}/gallery/">
+    <figure>
+      <img src="/images/hoophouse/{{ $p.stem }}.jpg"
+           srcset="/images/hoophouse/{{ $p.stem }}.jpg 640w, /images/hoophouse/{{ $p.stem }}-{{ $p.big }}.jpg {{ $p.big }}w"
+           sizes="{{ $sizes }}"
+           {{ if gt $i 0 }}loading="lazy"{{ end }}
+           alt="{{ $p.alt }}">
+      <figcaption>{{ $p.cap }}</figcaption>
+    </figure>
+  </a>
+  {{- end }}
+</div>

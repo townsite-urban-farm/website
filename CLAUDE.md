@@ -10,9 +10,18 @@ See README.md for build/deploy details.
 It is a worker-facing reference page — share the URL directly.
 Do not add it to the nav without checking with the site owner.
 
-## Homepage "Live from the farm" section
+## Design language (restyled 2026-08-15)
 
-Added 2026-08-11: timelapse video embed + weather station button at the top of `layouts/index.html` (styles in `assets/css/main.css`, `.farm-live-*`).
+Flat, type-driven layout: neutral gray ground, white cards with 1px hairline borders, no gradients or box shadows.
+Brand blues (`--blue-primary` #2979B5, `--blue-dark` #0D3D6B) are accents only — no large colored blocks.
+Legacy variable names (`--blue-light`, `--blue-mid`, `--text-muted`, `--radius`, etc.) are kept as aliases in `assets/css/main.css` because the timelapse and water-systems templates use them in inline styles — do not remove them.
+
+## Hoophouse montage (homepage + timelapse page)
+
+Replaced the "Live from the farm" video embed 2026-08-15: a photo montage (matching the TUF timelapse flyer) rendered by `layouts/partials/hoophouse-montage.html`, styles in `assets/css/main.css` (`.montage`, `.montage-strip`).
+Used 2×2 on the homepage and 4-across above the video on `/timelapse/`.
+Photos live in `static/images/hoophouse/` in two sizes each: 640w (copied from R2 gallery previews) and 1280w (resized from the full-res originals in the private B2 `hoophouse-photos` bucket; the 2022 photo's original camera tops out at 720w).
+Browsers choose via `srcset`/`sizes` — keep both sizes if photos are ever swapped.
 Weather Underground no longer offers embeddable widgets/stickers (verified 2026-08-11), so the weather station is a plain link — URL lives in `hugo.toml` as `params.weatherStationUrl`.
 
 ## Key contacts embedded in content
