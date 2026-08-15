@@ -4,11 +4,10 @@ Hugo static site, hosted on Cloudflare Pages at townsiteuf.org.
 Deploy by pushing to `main` — Cloudflare builds automatically.
 See README.md for build/deploy details.
 
-## Pages not linked from main nav
+## Water systems page
 
-`/water-systems/` is intentionally absent from the nav.
-It is a worker-facing reference page — share the URL directly.
-Do not add it to the nav without checking with the site owner.
+`/water-systems/` was added to the main nav ("Water") and footer 2026-08-15 at the site owner's request (it was previously worker-facing only).
+The site-plan page shows CSS-stacked thumbnails of the water-systems map layers (`.ws-thumbs` in `assets/css/main.css`) — they reuse the full-size PNGs from `static/water-systems/`, so they stay current if the maps are updated.
 
 ## Design language (restyled 2026-08-15)
 

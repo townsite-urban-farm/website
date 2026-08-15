@@ -258,6 +258,36 @@ main { padding: 0 0 4rem; }
 .tl-photos { margin-bottom: 2rem; }
 .tl-photos .montage-links { margin-top: .9rem; }
 
+/* ---- Water systems map thumbnails (site-plan page) ---- */
+.ws-thumbs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.ws-thumb { display: block; text-decoration: none; color: inherit; }
+
+.ws-thumb-map {
+  position: relative;
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--white);
+}
+.ws-thumb-map img { width: 100%; display: block; }
+.ws-thumb-overlay { position: absolute; top: 0; left: 0; }
+
+.ws-thumb:hover .ws-thumb-map { border-color: var(--blue-primary); }
+
+.ws-thumb-caption {
+  display: block;
+  font-size: .78rem;
+  color: var(--ink-soft);
+  margin-top: .35rem;
+}
+
 /* ---- Community / WhatsApp section ---- */
 .community-section {
   background: var(--white);
