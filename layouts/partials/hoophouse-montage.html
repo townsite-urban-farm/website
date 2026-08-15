@@ -3,6 +3,8 @@
   Call with: partial "hoophouse-montage.html" (dict "site" .Site "class" "<extra class>" "sizes" "<img sizes attr>")
   Each photo has a 640w preview plus a larger variant (1280w, except the 2022
   camera whose original tops out at 720w) — browsers pick via srcset/sizes.
+  Each link carries a #YYYY-MM-DD-HH hash (first 13 chars of the stem); the
+  gallery scrolls to and highlights that photo (see hoophouse-timelapse build.py).
 */ -}}
 {{- $r2 := .site.Params.r2MediaUrl -}}
 {{- $sizes := .sizes -}}
@@ -14,7 +16,7 @@
 -}}
 <div class="montage{{ with .class }} {{ . }}{{ end }}">
   {{- range $i, $p := $photos }}
-  <a href="{{ $r2 }}/gallery/">
+  <a href="{{ $r2 }}/gallery/#{{ substr $p.stem 0 13 }}">
     <figure>
       <img src="/images/hoophouse/{{ $p.stem }}.jpg"
            srcset="/images/hoophouse/{{ $p.stem }}.jpg 640w, /images/hoophouse/{{ $p.stem }}-{{ $p.big }}.jpg {{ $p.big }}w"
