@@ -121,7 +121,7 @@
     <tbody>
       {{ range .season }}
       <tr>
-        <td>{{ .label }}</td>
+        <td>{{ .label }}{{ with .start_date }} <span class="ws-season-note">(since {{ . }})</span>{{ end }}</td>
         <td class="ws-num">{{ .gallons }}</td>
       </tr>
       {{ end }}
