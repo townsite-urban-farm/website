@@ -9,6 +9,14 @@ See README.md for build/deploy details.
 `/water-systems/` was added to the main nav ("Water") and footer 2026-08-15 at the site owner's request (it was previously worker-facing only).
 The site-plan page shows CSS-stacked thumbnails of the water-systems map layers (`.ws-thumbs` in `assets/css/main.css`) — they reuse the full-size PNGs from `static/water-systems/`, so they stay current if the maps are updated.
 
+## Water usage page (`/water-systems/water-usage/`)
+
+`data/irrigation_summary.json` and `static/irrigation-reports/` are written by the nightly workflow in the `tuf-irrigation-data` repo (see its CLAUDE.md); never commit them by hand.
+To preview a data change locally, copy the regenerated files in from that repo, review with `hugo server`, then `git checkout -- data/irrigation_summary.json static/irrigation-reports/` before committing template changes.
+The two weekly tables in `layouts/water-systems/water-usage.html` are wrapped in native `<details class="ws-fold">` elements, collapsed by default (no JS); the season tables stay open.
+Crops carrying `start_date` in the summary (plants added mid-season, e.g. the pear tree 2026-08-27) get a "(since YYYY-MM-DD)" label in the season-by-crop table.
+The footnote about estimated flow rates (2.0/1.0 GPM) only renders when a zone is flagged `estimated` and is stale; all zones were measured in 2026.
+
 ## Design language (restyled 2026-08-15)
 
 Flat, type-driven layout: neutral gray ground, white cards with 1px hairline borders, no gradients or box shadows.
