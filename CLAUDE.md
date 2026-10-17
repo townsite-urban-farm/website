@@ -16,6 +16,8 @@ To preview a data change locally, copy the regenerated files in from that repo, 
 The two weekly tables in `layouts/water-systems/water-usage.html` are wrapped in native `<details class="ws-fold">` elements, collapsed by default (no JS); the season tables stay open.
 Crops carrying `start_date` in the summary (plants added mid-season, e.g. the pear tree 2026-08-27) get a "(since YYYY-MM-DD)" label in the season-by-crop table.
 The two season-total headings show "start to end" when the summary carries a non-null `season_end` (set in the data repo once the farm programs stop; 2026-10-09 for 2026) and "from start" otherwise.
+Inside the `{{ range }}` blocks of that template the dot is the zone, week, or crop entry, not the summary, so top-level fields must be captured in variables near the top (`$season_start`, `$season_end`, `$flow_estimated`) before use; a bare `.season_end` inside the crop loop silently rendered nothing (2026-10-17).
+To verify a template change without deploying, `hugo --quiet --destination "$TMPDIR/hugo-out"` builds the site locally (Hugo is installed via Homebrew), and the page can then be grepped under that directory.
 The footnote about estimated flow rates (2.0/1.0 GPM) only renders when a zone is flagged `estimated` and is stale; all zones were measured in 2026.
 
 ## Design language (restyled 2026-08-15)
