@@ -15,6 +15,7 @@
   {{ $visible_zones := .default_visible_zones }}
   {{ $flow_estimated := .flow_rate_estimated }}
   {{ $season_start := .season_start }}
+  {{ $season_end := .season_end }}
 
   <div class="ws-controls ws-zone-controls" role="group" aria-label="Zones"
        id="ws-usage-data"
@@ -115,7 +116,7 @@
   </table>
   </details>
 
-  <h3>Season total by crop <span class="ws-season-note">({{ if .season_end }}{{ $season_start }} to {{ .season_end }}{{ else }}from {{ $season_start }}{{ end }})</span></h3>
+  <h3>Season total by crop <span class="ws-season-note">({{ if $season_end }}{{ $season_start }} to {{ $season_end }}{{ else }}from {{ $season_start }}{{ end }})</span></h3>
   <table class="ws-table">
     <thead>
       <tr>
