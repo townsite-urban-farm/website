@@ -64,7 +64,7 @@
   </table>
   </details>
 
-  <h2>Season total <span class="ws-season-note">(from {{ .season_start }})</span></h2>
+  <h2>Season total <span class="ws-season-note">({{ if .season_end }}{{ .season_start }} to {{ .season_end }}{{ else }}from {{ .season_start }}{{ end }})</span></h2>
   <table class="ws-table">
     <thead>
       <tr>
@@ -115,7 +115,7 @@
   </table>
   </details>
 
-  <h3>Season total by crop <span class="ws-season-note">(from {{ $season_start }})</span></h3>
+  <h3>Season total by crop <span class="ws-season-note">({{ if .season_end }}{{ $season_start }} to {{ .season_end }}{{ else }}from {{ $season_start }}{{ end }})</span></h3>
   <table class="ws-table">
     <thead>
       <tr>

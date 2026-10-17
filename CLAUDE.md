@@ -15,6 +15,7 @@ The site-plan page shows CSS-stacked thumbnails of the water-systems map layers 
 To preview a data change locally, copy the regenerated files in from that repo, review with `hugo server`, then `git checkout -- data/irrigation_summary.json static/irrigation-reports/` before committing template changes.
 The two weekly tables in `layouts/water-systems/water-usage.html` are wrapped in native `<details class="ws-fold">` elements, collapsed by default (no JS); the season tables stay open.
 Crops carrying `start_date` in the summary (plants added mid-season, e.g. the pear tree 2026-08-27) get a "(since YYYY-MM-DD)" label in the season-by-crop table.
+The two season-total headings show "start to end" when the summary carries a non-null `season_end` (set in the data repo once the farm programs stop; 2026-10-09 for 2026) and "from start" otherwise.
 The footnote about estimated flow rates (2.0/1.0 GPM) only renders when a zone is flagged `estimated` and is stale; all zones were measured in 2026.
 
 ## Design language (restyled 2026-08-15)
